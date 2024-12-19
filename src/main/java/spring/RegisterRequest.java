@@ -42,4 +42,5 @@ public class RegisterRequest {
 	public boolean isPasswordEqualToConfirmPassword() {
 		return password.equals(confirmPassword);
 	}
+
 }

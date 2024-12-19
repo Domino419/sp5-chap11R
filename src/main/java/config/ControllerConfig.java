@@ -1,11 +1,9 @@
 package config;
 
 import controller.RegisterController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import spring.MemberRegisterService;
-
 
 /**
  * class         : ControllerConfig
@@ -15,15 +13,12 @@ import spring.MemberRegisterService;
 @Configuration
 public class ControllerConfig {
 
-    /**
-     * field         : memberRegSvc
-     * type          : MemberRegisterService
-     * description   : 회원 등록 서비스를 처리하는 `MemberRegisterService` 객체.
-     */
-    @Autowired
-    private MemberRegisterService memberRegSvc;
+    private final MemberRegisterService memberRegSvc;
 
-
+    // 생성자 주입
+    public ControllerConfig(MemberRegisterService memberRegSvc) {
+        this.memberRegSvc = memberRegSvc;
+    }
 
     /**
      * method        : registerController
@@ -33,20 +28,7 @@ public class ControllerConfig {
     @Bean
     public RegisterController registerController() {
         RegisterController controller = new RegisterController();
-        controller.setMemberRegisterService(memberRegSvc);    // memberRegSvc 주입
+        controller.setMemberRegisterService(memberRegSvc); // memberRegSvc 주입
         return controller;
     }
-
-
-//    /**
-//     * method        : registerController
-//     * date          : 24-12-18
-//     * return        : RegisterController - 회원 등록 컨트롤러 빈
-//     * description   : RegisterController 객체를 Spring Bean으로 등록
-//     */
-//    @Bean
-//    public RegisterController registerController() {
-//        return new RegisterController();
-//    }
-
 }
