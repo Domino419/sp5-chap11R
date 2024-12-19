@@ -70,6 +70,7 @@ public class RegisterController {
         // registerRequest 객체는 이제 모델에 자동으로 추가됨
         return "register/step2";
     }
+
     /**  git 검증 완료
      * method        : handleStep2Get
      * date          : 24-12-18
