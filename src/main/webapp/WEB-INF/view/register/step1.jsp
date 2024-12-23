@@ -6,7 +6,6 @@
 </head>
 <body>
 	<h2>약관</h2>
-	<h2>[리스트 11.6]</h2>
 	<p>약관 내용</p>
 	<form action="step2" method="post">
 	<label>

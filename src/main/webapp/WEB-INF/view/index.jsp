@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Main</title>
+    <title>Index</title>
 </head>
 <body>
     <p>환영합니다.</p>
