@@ -4,6 +4,8 @@ import controller.RegisterController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import spring.MemberRegisterService;
+import survey.SurveyController;
+
 
 /**
  * class         : ControllerConfig
@@ -31,4 +33,15 @@ public class ControllerConfig {
         controller.setMemberRegisterService(memberRegSvc); // memberRegSvc 주입
         return controller;
     }
+
+    /**
+     * method        : surveyController
+     * date          : 24-12-17
+     * return        : SurveyController - 설문 컨트롤러 빈
+     */
+    @Bean
+    public SurveyController surveyController() {
+        return new SurveyController();
+    }
+
 }
