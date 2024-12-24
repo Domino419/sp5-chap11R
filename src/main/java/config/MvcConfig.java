@@ -2,15 +2,19 @@ package config;
 
 
 
+import org.slf4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource ;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 
 /**
@@ -21,6 +25,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc   // 스프링 MVC 기능을 활성화하는 애노테이션
 public class MvcConfig implements WebMvcConfigurer  {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(MvcConfig.class);
 
     /**
      * method        : configureDefaultServletHandling
@@ -54,13 +60,17 @@ public class MvcConfig implements WebMvcConfigurer  {
      * return        : MessageSource
      * description   : ResourceBundleMessageSource를 설정하여 애플리케이션의 메시지 리소스를 관리.
      *                 - basename: 프로퍼티 파일의 기본 경로 및 이름 설정 (messages.label)
-     *                 - defaultEncoding: 프로퍼티 파일의 기본 인코딩 설정 (UTF-8)
+     *                 - defaultEncoding: 프로퍼티 파일의 기본 인코딩 설정 (UTF-8) http://localhost:8080/register/step1
+     *
      */
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
-        ms.setBasename("messages.label");           // messages 폴더 안에 있는 label.properties
+        ms.setBasename("messages.label_ko");
         ms.setDefaultEncoding("UTF-8");
+        ms.setCacheSeconds(0);  // 캐시를 비활성화하여 파일 변경을 바로 반영
+
+        log.info("Loading messages file: " + ms.getBasenameSet());
         return ms;
     }
 

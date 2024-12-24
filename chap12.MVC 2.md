@@ -29,7 +29,35 @@ label.properties 작성, UTF-8로 작성하기 위해서 메모장에서 편집 
 label.properties을 삭제하고 다시 생성해보기.
 ```
 
->> 프로퍼티 파일 만들면서 로케일 에러 뜨는 거. 구글링 좀 더 해보고 수정할 것 !!!
-> 325page 
 
+12/24 22:09
+프로퍼티 파일 로케일 에러 뜨는 거 아직 수정 중..
+import org.springframework.context.support.ResourceBundleMessageSource;에서 
+import org.springframework.context.support.ReloadableResourceBundleMessageSource ;로 바꿈
+- 메시지 리소스가 자주 변경되지 않는 경우: ResourceBundleMessageSource를 사용.
+- 메시지 리소스가 자주 변경되고 실시간 반영이 필요한 경우: ReloadableResourceBundleMessageSource를 사용.
+
+프로퍼티 파일을 messages_ko_KR.properties 으로 수정해봄.
+Caused by: javax.servlet.jsp.JspTagException: No message found under code 'member.register' for locale 'ko_KR'.
+at org.springframework.web.servlet.tags.MessageTag.doEndTag(MessageTag.java:293)
+인텔리제이 setting 수정 -  Editor -> File Encodings 에서 Properties Files (*.properties) 영역에서
+- Default encoding for properties files: 를 UTF-8로 설정 /  Transparent native-to-ascii conversion 체크 
+
+
+
+프로퍼티 파일 messages_ko_KR.properties 
+
+
+
+아놕..미치네
+프로퍼티 파일 제대로 읽어오질 못해서 파일 경로 맞는지 확인 messages/label_ko.properties 
+set할 때 맞게 했는지 확인 setBasename("messages.label_ko")
+maven 빌드 하고 나서 target/classes/messages에 있는지 확인
+캐시 비활성화 시키는 거 까지 했음. ms.setCacheSeconds(0);  
+인텔리제이 프로퍼티 파일 인코딩 UTF-8 로 수정했음.
+그런데 안됨.
+
+강제로 메시지 소스 등록할 예정.
+
+오늘은 일단 여기까지만.
 

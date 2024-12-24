@@ -2,6 +2,7 @@ package controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import spring.DuplicateMemberException ;
 import spring.MemberRegisterService ;
 import spring.RegisterRequest ;
+
+import java.util.Locale;
 
 
 @Controller
@@ -45,6 +48,7 @@ public class RegisterController {
     @RequestMapping("/register/step1")
     public String handleStep1() {
         log.info("handleStep1-- " );
+        LocaleContextHolder.setLocale(Locale.KOREA);  // Locale.KOREA는 ko_KR을 의미
         return "register/step1";
     }
 
@@ -106,6 +110,17 @@ public class RegisterController {
     }
 }
 
+    /**  git 검증 완료
+     * method        : currentLocale
+     * date          : 24-12-24
+     * return        : locale 확인을 위한 임시 메소드
+     */
+    @GetMapping("/current-locale")
+    public String currentLocale() {
+        Locale locale = LocaleContextHolder.getLocale();
+        System.out.println("--------------------- RegisterController.currentLocale: "+ locale  );
+        return "Current Locale: " + locale;
+    }
 
 
 
