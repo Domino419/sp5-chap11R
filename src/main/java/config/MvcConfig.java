@@ -2,7 +2,10 @@ package config;
 
 
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -44,6 +47,22 @@ public class MvcConfig implements WebMvcConfigurer  {
         registry.jsp("/WEB-INF/view/", ".jsp");
     }
 
+
+    /**
+     * method        : messageSource
+     * date          : 24-12-23
+     * return        : MessageSource
+     * description   : ResourceBundleMessageSource를 설정하여 애플리케이션의 메시지 리소스를 관리.
+     *                 - basename: 프로퍼티 파일의 기본 경로 및 이름 설정 (messages.label)
+     *                 - defaultEncoding: 프로퍼티 파일의 기본 인코딩 설정 (UTF-8)
+     */
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+        ms.setBasename("messages.label");           // messages 폴더 안에 있는 label.properties
+        ms.setDefaultEncoding("UTF-8");
+        return ms;
+    }
 
 }
 
