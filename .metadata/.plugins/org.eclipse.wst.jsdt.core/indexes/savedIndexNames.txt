@@ -1,0 +1,2 @@
+INDEX VERSION 1.4+C:\spring5fs\sp5-chap11R\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1769662840.index

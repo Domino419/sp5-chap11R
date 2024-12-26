@@ -55,9 +55,23 @@ set할 때 맞게 했는지 확인 setBasename("messages.label_ko")
 maven 빌드 하고 나서 target/classes/messages에 있는지 확인
 캐시 비활성화 시키는 거 까지 했음. ms.setCacheSeconds(0);  
 인텔리제이 프로퍼티 파일 인코딩 UTF-8 로 수정했음.
-그런데 안됨.
+그런데 안됨.  java.util.MissingResourceException: Can't find bundle for base name messages.label_ko, locale ko_KR 
+
 
 강제로 메시지 소스 등록할 예정.
 
-오늘은 일단 여기까지만.
+2024.12.24 23:57
+javax.servlet.jsp.JspTagException: No message found under code 'member.register' for locale 'ko_KR'.
+at org.springframework.web.servlet.tags.MessageTag.doEndTag(MessageTag.java:293)
+아놕... 앙대앙대....
+
+
+2024.12.26 17:13
+이클립스에서 교재와 동일하게 프로퍼티 파일을 생성해서 인텔리로 가져옴. 어..된다.
+아..step1에서 프로퍼티 파일 값 가져오는 걸 모두 하드코딩 해놔서 되는 거.
+chap12에서 다시 진행해보기.
+
+chap12는 프로퍼티 파일을 이클립스에서 만든 걸 가져왔음.
+기존 예제소스를 그대로 다 복사함.
+port는 8070 사용 하는 걸로 해서 http://localhost:8070/register/step1 
 

@@ -63,16 +63,29 @@ public class MvcConfig implements WebMvcConfigurer  {
      *                 - defaultEncoding: 프로퍼티 파일의 기본 인코딩 설정 (UTF-8) http://localhost:8080/register/step1
      *
      */
+//    @Bean
+//    public MessageSource messageSource() {
+//     //   ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+//        ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource() ;  //자동 리로드
+//        ms.setBasename("messages.label_ko");
+//        ms.setDefaultEncoding("UTF-8");
+//        ms.setCacheSeconds(0);  // 캐시를 비활성화하여 파일 변경을 바로 반영
+//
+//        log.info("Loading messages file: " + ms.getBasenameSet());
+//        return ms;
+//    }
+
     @Bean
     public MessageSource messageSource() {
-        ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
-        ms.setBasename("messages.label_ko");
-        ms.setDefaultEncoding("UTF-8");
-        ms.setCacheSeconds(0);  // 캐시를 비활성화하여 파일 변경을 바로 반영
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:messages.label_ko"); // 강제로 클래스패스에서 파일을 로드
+        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setCacheSeconds(0); // 캐시 비활성화
+        log.info("Loading messages file: " + messageSource.getBasenameSet());
 
-        log.info("Loading messages file: " + ms.getBasenameSet());
-        return ms;
+        return messageSource;
     }
+
 
 }
 
